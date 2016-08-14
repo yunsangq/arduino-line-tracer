@@ -6,7 +6,7 @@
 #define VALUE  500
 
 void setup() { 
-  //Serial.begin(9600);
+  Serial.begin(9600);
   Robot.begin();   
   Robot.stop();    
 }
@@ -28,11 +28,7 @@ int check = 0;
 void loop() {
   cnt++;
   //Serial.println(cnt);
-  if(cnt >= 30500){
-    Robot.motors(0,0);
-    delay(10000);
-  }
-  if(cnt < 22800 || check == 1){
+  if(cnt < 23500 || check == 1){
     //우회전 방향전환 => |a| > |b| (a>0, b<0)
     // 0 0 0 0 1 1 AND
     if((Robot.Front_IRread(4) < VALUE) && (Robot.Front_IRread(5) < VALUE) && (Robot.Front_IRread(3) < VALUE)){
@@ -69,7 +65,7 @@ void loop() {
       Robot.motors(-120, -30);
     } 
   }
-  else if(cnt < 30000 && cnt >= 22800){
+  else if(cnt < 30000 && cnt >= 23500){
     //직진 가능하도록 속도 200근처에서 좌 우 최대한 수평값 찾기(내일)
     // 0 0 1 1 0 0
     if((Robot.Front_IRread(2) < VALUE) || (Robot.Front_IRread(3) < VALUE)){
