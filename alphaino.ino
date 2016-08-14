@@ -22,12 +22,18 @@ void setup() {
 // 왼쪽회전 -> R,L => a > b
 // 오른쪽회전 -> R,L => a < b
 
-int cnt = 0; 
+long cnt = 0; 
 int check = 0;
 void loop() {
   cnt++;
   //Serial.println(cnt);
-  if(cnt < 23500 || check == 1){
+  if(cnt > 36500){
+    if((Robot.Front_IRread(0) > VALUE) && (Robot.Front_IRread(1) > VALUE) && (Robot.Front_IRread(2) > VALUE) && (Robot.Front_IRread(3) > VALUE) && (Robot.Front_IRread(4) > VALUE) && (Robot.Front_IRread(5) > VALUE) && (Robot.Rear_IRread(0) > VALUE) && (Robot.Rear_IRread(1) > VALUE) && (Robot.Rear_IRread(2) > VALUE) && (Robot.Rear_IRread(3) > VALUE) && (Robot.Rear_IRread(4) > VALUE) && (Robot.Rear_IRread(5) > VALUE)){
+      Robot.motors(0,0);
+      delay(5000);
+    }
+  }
+  else if(cnt < 23500 || check == 1){
     //우회전 방향전환 => |a| > |b| (a>0, b<0)
     // 0 0 0 0 1 1 AND
     if((Robot.Front_IRread(4) < VALUE) && (Robot.Front_IRread(5) < VALUE) && (Robot.Front_IRread(3) < VALUE)){
