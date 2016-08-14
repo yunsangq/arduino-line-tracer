@@ -24,7 +24,6 @@ void setup() {
 
 int cnt = 0; 
 int check = 0;
-
 void loop() {
   cnt++;
   //Serial.println(cnt);
@@ -63,7 +62,7 @@ void loop() {
     // 1 1 0 0 0 0 OR
     if((Robot.Front_IRread(0) < VALUE) || (Robot.Front_IRread(1) < VALUE)){
       Robot.motors(-120, -30);
-    } 
+    }
   }
   else if(cnt < 30000 && cnt >= 23500){
     //직진 가능하도록 속도 200근처에서 좌 우 최대한 수평값 찾기(내일)
@@ -72,9 +71,21 @@ void loop() {
       Robot.motors(-160, -180);
     }
 
+    //우회전 직진 보정 => |a| < |b| (a<0, b<0)
+    // 0 0 0 0 1 1 OR
+    if((Robot.Front_IRread(4) < VALUE) || (Robot.Front_IRread(5) < VALUE)){
+      Robot.motors(-30, -100);
+    }
+
+    //좌회전 직진 보정 => |a| > |b| (a<0, b<0)
+    // 1 1 0 0 0 0 OR
+    if((Robot.Front_IRread(0) < VALUE) || (Robot.Front_IRread(1) < VALUE)){
+      Robot.motors(-100, -30);
+    }
+ 
     if((Robot.Front_IRread(0) > VALUE) && (Robot.Front_IRread(1) > VALUE) && (Robot.Front_IRread(2) > VALUE) && (Robot.Front_IRread(3) > VALUE) && (Robot.Front_IRread(4) > VALUE) && (Robot.Front_IRread(5) > VALUE) && (Robot.Rear_IRread(0) > VALUE) && (Robot.Rear_IRread(1) > VALUE) && (Robot.Rear_IRread(2) > VALUE) && (Robot.Rear_IRread(3) > VALUE) && (Robot.Rear_IRread(4) > VALUE) && (Robot.Rear_IRread(5) > VALUE)){
       Robot.motors(0,0);
-      delay(350);
+      delay(500);
       Robot.motors(-80, -60);
       while(1){
         if((Robot.Front_IRread(0) < VALUE) || (Robot.Front_IRread(1) < VALUE)  || (Robot.Front_IRread(2) < VALUE) || (Robot.Front_IRread(3) < VALUE)  || (Robot.Front_IRread(4) < VALUE) || (Robot.Front_IRread(5) < VALUE)){
@@ -83,7 +94,7 @@ void loop() {
         }
       } 
     }
+    
   }
+  //delay(20);
 }
-
-
