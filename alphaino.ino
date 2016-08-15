@@ -31,7 +31,7 @@ void loop() {
     delay(500);
   }
   */
-  if(cnt<4000){
+  if(cnt<8000){
     if((Robot.Front_IRread(0) < VALUE) && (Robot.Front_IRread(1) < VALUE) && (Robot.Front_IRread(2) < VALUE) && (Robot.Front_IRread(3) < VALUE) && (Robot.Front_IRread(4) < VALUE) && (Robot.Front_IRread(5) < VALUE)){
       Robot.motors(-230, -230);
     }
@@ -69,7 +69,7 @@ void loop() {
     //delay(1000);
     if( (Robot.Front_IRread(0) > VALUE) && (Robot.Front_IRread(1) > VALUE) && (Robot.Front_IRread(2) > VALUE) && (Robot.Front_IRread(3) > VALUE) && (Robot.Front_IRread(4) > VALUE) && (Robot.Front_IRread(5) > VALUE) )
     {
-        Robot.motors(-140,-80);
+        Robot.motors(-130,-90);
     }
   }
 
