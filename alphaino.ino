@@ -21,16 +21,13 @@ void setup() {
 // +가 커질수록 뒤로 가는 속도 증가
 // 왼쪽회전 -> R,L => a > b
 // 오른쪽회전 -> R,L => a < b
-
-//long cnt = 0;
-int check = 0;
+long int cnt=0;
 void loop() {
-  //cnt++;
-  
-  if( check < 3 && (Robot.Front_IRread(0) < VALUE) && (Robot.Front_IRread(1) < VALUE) && (Robot.Front_IRread(2) < VALUE) && (Robot.Front_IRread(3) < VALUE) && (Robot.Front_IRread(4) < VALUE) && (Robot.Front_IRread(5) < VALUE)){
-    check++;
-    Robot.motors(-230, -230);
-    delay(1000);
+  cnt++;
+  //코스에 따라 수정
+  if( cnt<2000 && (Robot.Front_IRread(0) < VALUE) && (Robot.Front_IRread(1) < VALUE) && (Robot.Front_IRread(2) < VALUE) && (Robot.Front_IRread(3) < VALUE) && (Robot.Front_IRread(4) < VALUE) && (Robot.Front_IRread(5) < VALUE)){
+    Robot.motors(-230, -23);
+    delay(500);
   }
   //우회전 방향전환 => |a| > |b| (a>0, b<0)
   else if((Robot.Front_IRread(4) < VALUE) && (Robot.Front_IRread(5) < VALUE) && (Robot.Front_IRread(3) < VALUE)){
@@ -44,7 +41,7 @@ void loop() {
     delay(200);
   }
 
-  //항시구간
+
   if( (Robot.Front_IRread(2) < VALUE) || (Robot.Front_IRread(3) < VALUE) )
   {
       Robot.motors(-230, -230);
@@ -57,6 +54,25 @@ void loop() {
   {
       Robot.motors(80, -150);
   }
+  //코스에 따라 수정
+  if( cnt>24000 && cnt<30000)
+  {
+    //Robot.motors(0,0);
+    //delay(1000);
+    if( (Robot.Front_IRread(0) > VALUE) && (Robot.Front_IRread(1) > VALUE) && (Robot.Front_IRread(2) > VALUE) && (Robot.Front_IRread(3) > VALUE) && (Robot.Front_IRread(4) > VALUE) && (Robot.Front_IRread(5) > VALUE) )
+    {
+        Robot.motors(-140,-100);
+    }
+  }
+
+  //정지
+  if( cnt>38000 )
+  {
+     if((Robot.Front_IRread(0) > VALUE) && (Robot.Front_IRread(1) > VALUE) && (Robot.Front_IRread(2) > VALUE) && (Robot.Front_IRread(3) > VALUE) && (Robot.Front_IRread(4) > VALUE) && (Robot.Front_IRread(5) > VALUE) && (Robot.Rear_IRread(0) > VALUE) && (Robot.Rear_IRread(1) > VALUE) && (Robot.Rear_IRread(2) > VALUE) && (Robot.Rear_IRread(3) > VALUE) && (Robot.Rear_IRread(4) > VALUE) && (Robot.Rear_IRread(5) > VALUE)){
+        Robot.motors(0,0);
+        delay(5000);
+      }
+   }
 }
 
 /*
