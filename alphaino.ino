@@ -62,6 +62,7 @@ void loop() {
   {
       Robot.motors(80, -150);
   }
+
   //코스에 따라 수정
   if( cnt>24000 && cnt<30000)
   {
@@ -69,7 +70,7 @@ void loop() {
     //delay(1000);
     if( (Robot.Front_IRread(0) > VALUE) && (Robot.Front_IRread(1) > VALUE) && (Robot.Front_IRread(2) > VALUE) && (Robot.Front_IRread(3) > VALUE) && (Robot.Front_IRread(4) > VALUE) && (Robot.Front_IRread(5) > VALUE) )
     {
-        Robot.motors(-130,-90);
+        Robot.motors(-130,-100);
     }
   }
 
