@@ -25,12 +25,20 @@ long int cnt=0;
 void loop() {
   cnt++;
   //코스에 따라 수정
-  if( cnt<2000 && (Robot.Front_IRread(0) < VALUE) && (Robot.Front_IRread(1) < VALUE) && (Robot.Front_IRread(2) < VALUE) && (Robot.Front_IRread(3) < VALUE) && (Robot.Front_IRread(4) < VALUE) && (Robot.Front_IRread(5) < VALUE)){
-    Robot.motors(-230, -23);
+  /*
+  if((Robot.Front_IRread(0) < VALUE) && (Robot.Front_IRread(1) < VALUE) && (Robot.Front_IRread(2) < VALUE) && (Robot.Front_IRread(3) < VALUE) && (Robot.Front_IRread(4) < VALUE) && (Robot.Front_IRread(5) < VALUE)){
+    Robot.motors(-230, -230);
     delay(500);
   }
+  */
+  if(cnt<4000){
+    if((Robot.Front_IRread(0) < VALUE) && (Robot.Front_IRread(1) < VALUE) && (Robot.Front_IRread(2) < VALUE) && (Robot.Front_IRread(3) < VALUE) && (Robot.Front_IRread(4) < VALUE) && (Robot.Front_IRread(5) < VALUE)){
+      Robot.motors(-230, -230);
+    }
+  }
+  
   //우회전 방향전환 => |a| > |b| (a>0, b<0)
-  else if((Robot.Front_IRread(4) < VALUE) && (Robot.Front_IRread(5) < VALUE) && (Robot.Front_IRread(3) < VALUE)){
+  if((Robot.Front_IRread(4) < VALUE) && (Robot.Front_IRread(5) < VALUE) && (Robot.Front_IRread(3) < VALUE)){
     Robot.motors(80, -150);
     delay(200);
   }
@@ -61,7 +69,7 @@ void loop() {
     //delay(1000);
     if( (Robot.Front_IRread(0) > VALUE) && (Robot.Front_IRread(1) > VALUE) && (Robot.Front_IRread(2) > VALUE) && (Robot.Front_IRread(3) > VALUE) && (Robot.Front_IRread(4) > VALUE) && (Robot.Front_IRread(5) > VALUE) )
     {
-        Robot.motors(-140,-100);
+        Robot.motors(-140,-80);
     }
   }
 
